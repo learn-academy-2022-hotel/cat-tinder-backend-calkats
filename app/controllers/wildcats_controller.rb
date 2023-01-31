@@ -1,0 +1,2 @@
+class WildcatsController < ApplicationController
+end
