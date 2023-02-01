@@ -8,7 +8,11 @@ class WildcatsController < ApplicationController
       def create
         # Create a new cat
         wildcat = Wildcat.create(wildcat_params)
-        render json: wildcat
+        if wildcat.valid?
+            render json: wildcat
+        else
+            render json: wildcat.errors, status: 422
+        end
       end
     
       # Handle strong parameters, so we are secure
@@ -16,4 +20,5 @@ class WildcatsController < ApplicationController
       def wildcat_params
         params.require(:wildcat).permit(:name, :age, :enjoys, :dislikes, :image)
       end
+
 end
